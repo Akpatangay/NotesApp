@@ -1,0 +1,16 @@
+.far,
+.fas {
+  font-size: 130%;
+}
+section {
+  position: absolute;
+  left: 0;
+  width: 30%;
+  border: 1px solid;
+  height: 94%;
+}
+.each-note {
+  padding: 3%;
+  border-bottom: 1px solid;
+  height: 14%;
+}
