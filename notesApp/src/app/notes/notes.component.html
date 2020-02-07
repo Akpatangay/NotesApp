@@ -1,0 +1,16 @@
+<div class="row">
+  <ng-container *ngIf="notesArray.length">
+    <div class="sideBar">
+      <div>
+        <p class="heading">Notes</p>
+      </div>
+      <section class="each-note" *ngFor="let note of notesArray">
+        <p>
+          {{ note.title | json }}
+          <br />
+          {{ note.text | json }}
+        </p>
+      </section>
+    </div>
+  </ng-container>
+</div>

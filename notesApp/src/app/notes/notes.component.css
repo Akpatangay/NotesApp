@@ -1,7 +1,3 @@
-.far,
-.fas {
-  font-size: 130%;
-}
 .row {
   position: relative;
 }
@@ -25,11 +21,4 @@
   max-height: 15%;
   overflow-y: auto;
   top: 10%;
-}
-.active {
-  background-color: gainsboro;
-}
-.textEditor {
-  left: 30%;
-  margin-top: 20%;
 }

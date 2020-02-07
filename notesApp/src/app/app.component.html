@@ -3,10 +3,14 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-plus"></i> </a>
+          <a class="nav-link" (click)="addNote()"
+            ><i class="fas fa-plus"></i>
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="far fa-edit"></i></a>
+          <a class="nav-link" (click)="editNote()"
+            ><i class="far fa-edit"></i
+          ></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#"><i class="fas fa-trash"></i></a>
@@ -28,14 +32,42 @@
     </button>
   </nav>
 </header>
-<div class="row">
-  <ng-container>
-    <section>
-      <div class="each-note">one</div>
-      <div class="each-note">one</div>
-      <div class="each-note">one</div>
-    </section>
-  </ng-container>
+
+<!-- <app-notes
+  [newNote]="newNote"
+  (addedNewNote)="addedNewNote($event)"
+></app-notes> -->
+
+<div class="container">
+  <div class="row">
+    <ng-container *ngIf="notesArray.length">
+      <div class="sideBar">
+        <div>
+          <p class="heading">Notes</p>
+        </div>
+        <section
+          [ngClass]="{ active: focusNote[i] }"
+          class="each-note"
+          *ngFor="let note of notesArray; let i = index"
+        >
+          <p
+            [(ngModel)]="editOrAddNote"
+            ngDefaultControl
+            (click)="selectedNote(note, i)"
+          >
+            {{ note }}
+            <!-- <br />
+                  {{ note.text | json }} -->
+          </p>
+        </section>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row textEditor">
+    <div>
+      <input name="notes" [(ngModel)]="notesArray[index]" type="text" />
+    </div>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
