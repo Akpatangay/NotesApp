@@ -16,9 +16,13 @@
       </ul>
     </div>
 
-    <form class="form-inline" action="/action_page.php">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" />
-    </form>
+    <input
+      class="form-control mr-sm-2"
+      type="text"
+      ngDefaultControl
+      [(ngModel)]="search"
+      placeholder="Search"
+    />
 
     <button
       class="navbar-toggler"
@@ -31,39 +35,8 @@
   </nav>
 </header>
 
-<!-- <app-notes
-  [newNote]="newNote"
-  (addedNewNote)="addedNewNote($event)"
-></app-notes> -->
-
-<!-- <div class="container">
-  <div class="row">
-    <ng-container *ngIf="notesArray.length">
-      <div class="sideBar">
-        <div>
-          <p class="heading">Notes</p>
-        </div>
-        <section
-          [ngClass]="{ active: focusNote[i] }"
-          class="each-note"
-          *ngFor="let note of notesArray; let i = index"
-        >
-          <p
-            [(ngModel)]="editOrAddNote"
-            ngDefaultControl
-            (click)="selectedNote(note, i)"
-          >
-            {{ note }}
-          </p>
-        </section>
-      </div>
-    </ng-container>
-  </div>
-  <div class="row textEditor">
-    <div>
-      <input name="notes" [(ngModel)]="notesArray[index]" type="text" />
-    </div>
-  </div>
-</div> -->
-
-<app-notes (addedNewNote)="addedNewNote()"></app-notes>
+<app-notes
+  [search]="search"
+  (addedNewNote)="addedNewNote()"
+  (deleteIndex)="getIndex($event)"
+></app-notes>

@@ -1,40 +1,43 @@
 import { Injectable } from "@angular/core";
-import { NoteObject, Note } from "./interfaces/notes";
+import { NoteObject, Note } from "../interfaces/notes";
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class StoreAllNotesService {
   Notes: any;
-  notesArray: Note[];
+  notesArray: Note[] = [];
   eachNote: Note;
+  subject: Subject<Object>;
 
   constructor() {
+    this.subject = new Subject();
     let storageData = localStorage.getItem("storedNotes");
     if (!storageData) {
       let obj = {
-        title: "first note",
-        body: "body of first note",
+        title: "",
+        body: "",
         timeStamp: new Date()
       };
 
       this.notesArray.push(obj);
 
-      let notesObj = {
+      this.Notes = {
         notes: this.notesArray
       };
-      localStorage.setItem("storedNotes", JSON.stringify(notesObj));
+      localStorage.setItem("storedNotes", JSON.stringify(this.Notes));
     } else {
       this.Notes = JSON.parse(storageData);
     }
   }
   put() {
     let obj = {
-      title: "New Note",
-      body: "No additional information",
+      title: "",
+      body: "",
       timeStamp: new Date()
     };
-    this.Notes.Notes.notes.unshift(obj);
+    this.Notes.notes.unshift(obj);
   }
   get() {
     return this.Notes;

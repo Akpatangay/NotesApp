@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { StoreAllNotesService } from "../store-all-notes.service";
+import { StoreAllNotesService } from "../services/store-all-notes.service";
 import { Note, NoteObject } from "../interfaces/notes";
+import * as lodash from "lodash";
 
 @Component({
   selector: "app-notes",
@@ -12,22 +13,51 @@ export class NotesComponent implements OnInit {
   editOrAddNote: string;
   index: number = 0;
   focusNote: boolean[] = [];
+  showCursor: boolean = true;
+  titleSave: boolean = false;
 
-  constructor(public storedNotes: StoreAllNotesService) {}
+  @Input() search;
+  @Output() deleteIndex: EventEmitter<number> = new EventEmitter();
+
+  constructor(public storedNotes: StoreAllNotesService) {
+    this.storedNotes.subject.subscribe(data => {
+      this.focusNote = this.focusNote.fill(false);
+      this.focusNote[0] = true;
+    });
+  }
 
   ngOnInit() {
     console.log(this.storedNotes.get());
     this.focusNote = this.focusNote.fill(false);
     //alert("from notes" + this.storedNotes.dummyWord);
   }
-  @Input()
-  set newNote(value) {
-    alert(value);
-  }
+
   selectedNote(note, i) {
+    this.showCursor = true;
     this.focusNote.fill(false);
     this.index = i;
     this.focusNote[this.index] = this.focusNote[this.index] ? false : true;
-    console.log(note, this.index);
+    //console.log(note, this.index);
+    this.deleteIndex.emit(this.index);
   }
+
+  keyUpFunction(event) {
+    //if (this.storedNotes.Notes.notes[this.index].title === "") {
+    if (event.indexOf("\n") != -1) {
+      this.storedNotes.Notes.notes[this.index].title =
+        event.split("\n")[0] + " ";
+      this.storedNotes.Notes.notes[this.index].body = event.split("\n")[1];
+    } else {
+      this.storedNotes.Notes.notes[this.index].title = event;
+      // this.storedNotes.Notes.notes[this.index].body = event;
+    }
+
+    localStorage.setItem("storedNotes", JSON.stringify(this.storedNotes.Notes));
+    //this.storedNotes.Notes.notes[this.index].title = event;
+  }
+  debounceText = lodash.debounce(
+    event => this.keyUpFunction(event),
+    1000,
+    true
+  );
 }

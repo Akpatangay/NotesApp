@@ -2,34 +2,68 @@
   <div class="row">
     <div class="col-md-4">
       <!-- {{ storedNotes.Notes | json }} -->
-      <ng-container *ngIf="storedNotes.Notes.Notes.notes">
-        <div class="heading">Notes</div>
-        <div class="list">
-          <div
-            *ngFor="let note of storedNotes.Notes.Notes.notes; let i = index"
-          >
+      <div class="heading">Notes</div>
+      <div class="noNotes" *ngIf="!storedNotes?.Notes?.notes?.length">
+        No notes to display
+      </div>
+      <div class="list">
+        <ng-container *ngIf="storedNotes?.Notes?.notes?.length">
+          <div *ngFor="let note of storedNotes.Notes.notes; let i = index">
             <div
               class="eachNote"
               [ngClass]="{ active: focusNote[i] }"
               (click)="selectedNote(note, i)"
             >
-              <p class="title" [(ngModel)]="editOrAddNote" ngDefaultControl>
-                {{ note?.title | json }}
+              <p class="title" *ngIf="note.title === ''">
+                New Note
               </p>
-              <p class="body">{{ note?.body | json }}</p>
+              <p
+                class="title"
+                *ngIf="note.title !== ''"
+                [(ngModel)]="editOrAddNote"
+                ngDefaultControl
+              >
+                {{ note?.title }}
+              </p>
+              <p class="body" *ngIf="note.body === ''">
+                No additional information
+              </p>
+              <p class="body" *ngIf="note.body !== ''">
+                {{ note?.body }}
+              </p>
               <span class="date">{{ note.timeStamp | date: "medium" }}</span>
             </div>
           </div>
-        </div>
-      </ng-container>
+        </ng-container>
+      </div>
     </div>
     <div class="col-md-8 writingSpace">
-      <textarea
-        type="text"
-        name="noteBody"
-        [(ngModel)]="storedNotes.Notes.Notes.notes[index].body"
-      >
-      </textarea>
+      <ng-container *ngIf="storedNotes?.Notes?.notes?.length">
+        <!-- <h3>{{ (storedNotes?.Notes?.notes)[index]?.title }}</h3> -->
+        <!-- <ng-container *ngIf="(storedNotes?.Notes?.notes)[index]?.title">
+          <textarea
+            placeholder="Start Typing here..."
+            type="text"
+            name="noteBody"
+            autofocus
+            (keyup)="debounceText($event.target.value)"
+            [(ngModel)]="storedNotes.Notes.notes[index].title"
+          >
+          </textarea>
+        </ng-container> -->
+        <!-- <ng-container *ngIf="(storedNotes?.Notes?.notes)[index]?.title"> -->
+        <textarea
+          placeholder="Start Typing here..."
+          type="text"
+          name="noteBody"
+          autofocus
+          (keyup)="debounceText($event.target.value)"
+          [(ngModel)]="storedNotes.Notes.notes[index].title"
+        >
+        </textarea>
+        <!-- </ng-container> -->
+      </ng-container>
+
       <!-- {{ (storedNotes?.Notes?.Notes?.notes)[index]?.body | json }} -->
     </div>
   </div>

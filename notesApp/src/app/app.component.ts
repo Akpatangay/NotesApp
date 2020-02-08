@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { StoreAllNotesService } from "./store-all-notes.service";
+import { StoreAllNotesService } from "./services/store-all-notes.service";
 import { Note } from "./interfaces/notes";
 
 @Component({
@@ -21,7 +21,14 @@ export class AppComponent {
   }
   addedNewNote() {
     this.storedNotes.put();
-    return (this.newNote = true);
-    //this.storedNotes.Notes.Notes.notes.unshift(this.eachNote);
+    this.storedNotes.subject.next(true);
+    //this.storedNotes.Notes.notes.unshift(this.eachNote);
+  }
+  getIndex(currentIndex) {
+    this.index = currentIndex;
+  }
+  deleteNote() {
+    this.storedNotes.Notes.notes.splice(this.index, 1);
+    localStorage.setItem("storedNotes", this.storedNotes.Notes.notes);
   }
 }
