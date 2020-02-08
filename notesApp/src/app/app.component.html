@@ -3,17 +3,15 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" (click)="addNote()"
+          <a class="nav-link" (click)="addedNewNote()"
             ><i class="fas fa-plus"></i>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" (click)="editNote()"
-            ><i class="far fa-edit"></i
+          <a class="nav-link" (click)="deleteNote()"
+            ><i class="fas fa-trash"></i
           ></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-trash"></i></a>
         </li>
       </ul>
     </div>
@@ -38,7 +36,7 @@
   (addedNewNote)="addedNewNote($event)"
 ></app-notes> -->
 
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <ng-container *ngIf="notesArray.length">
       <div class="sideBar">
@@ -56,8 +54,6 @@
             (click)="selectedNote(note, i)"
           >
             {{ note }}
-            <!-- <br />
-                  {{ note.text | json }} -->
           </p>
         </section>
       </div>
@@ -68,6 +64,6 @@
       <input name="notes" [(ngModel)]="notesArray[index]" type="text" />
     </div>
   </div>
-</div>
+</div> -->
 
-<router-outlet></router-outlet>
+<app-notes (addedNewNote)="addedNewNote()"></app-notes>

@@ -1,4 +1,4 @@
-.row {
+/* .row {
   position: relative;
 }
 .heading {
@@ -21,4 +21,43 @@
   max-height: 15%;
   overflow-y: auto;
   top: 10%;
+} */
+
+.container {
+  padding: 0;
+  margin: 0;
+}
+.list {
+  border-right: 1px solid;
+  height: -webkit-fill-available;
+  max-height: inherit;
+  /* padding: 0; */
+  /* margin: 0; */
+  overflow-y: auto;
+}
+.eachNote {
+  border-bottom: 1px solid;
+  cursor: pointer !important;
+}
+.heading {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-right: 1px solid;
+  text-align: center;
+  font-size: 130%;
+  background-color: darkgray;
+}
+.title {
+  font-weight: bold;
+}
+.active {
+  background-color: wheat;
+}
+textarea {
+  width: 100%;
+  height: -webkit-fill-available;
+  border: none;
+}
+.writingSpace {
+  margin-top: 5%;
 }

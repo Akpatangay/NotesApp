@@ -1,16 +1,36 @@
-<div class="row">
-  <ng-container *ngIf="notesArray.length">
-    <div class="sideBar">
-      <div>
-        <p class="heading">Notes</p>
-      </div>
-      <section class="each-note" *ngFor="let note of notesArray">
-        <p>
-          {{ note.title | json }}
-          <br />
-          {{ note.text | json }}
-        </p>
-      </section>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <!-- {{ storedNotes.Notes | json }} -->
+      <ng-container *ngIf="storedNotes.Notes.Notes.notes">
+        <div class="heading">Notes</div>
+        <div class="list">
+          <div
+            *ngFor="let note of storedNotes.Notes.Notes.notes; let i = index"
+          >
+            <div
+              class="eachNote"
+              [ngClass]="{ active: focusNote[i] }"
+              (click)="selectedNote(note, i)"
+            >
+              <p class="title" [(ngModel)]="editOrAddNote" ngDefaultControl>
+                {{ note?.title | json }}
+              </p>
+              <p class="body">{{ note?.body | json }}</p>
+              <span class="date">{{ note.timeStamp | date: "medium" }}</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </div>
-  </ng-container>
+    <div class="col-md-8 writingSpace">
+      <textarea
+        type="text"
+        name="noteBody"
+        [(ngModel)]="storedNotes.Notes.Notes.notes[index].body"
+      >
+      </textarea>
+      <!-- {{ (storedNotes?.Notes?.Notes?.notes)[index]?.body | json }} -->
+    </div>
+  </div>
 </div>

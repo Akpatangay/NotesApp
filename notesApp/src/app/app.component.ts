@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { StoreAllNotesService } from "./store-all-notes.service";
+import { Note } from "./interfaces/notes";
 
 @Component({
   selector: "app-root",
@@ -8,34 +10,18 @@ import { Component } from "@angular/core";
 export class AppComponent {
   newNote: boolean = false;
   focusNote: any[] = [];
-  notesArray: any[] = [];
+  notesArray: Note[] = [];
   index: number;
+  eachNote: Note;
   editOrAddNote: string;
 
-  constructor() {
-    this.notesArray = ["abc", "123", "cde"];
+  constructor(public storedNotes: StoreAllNotesService) {
     this.focusNote = this.focusNote.fill(false);
+    //alert("from app" + this.storedNotes.dummyWord);
   }
-  addNote() {
-    this.focusNote = this.focusNote.fill(false);
-    this.notesArray.unshift("");
-    this.index = 0;
-    this.focusNote[this.index] = this.focusNote[this.index] ? false : true;
-
-    this.newNote = true;
-    // alert("note added");
-  }
-  addedNewNote(event) {
-    this.newNote = event;
-  }
-  editNote() {
-    this.editOrAddNote = this.notesArray[this.index];
-  }
-  selectedNote(note, i) {
-    this.focusNote = this.focusNote.fill(false);
-    this.index = i;
-    this.focusNote[this.index] = this.focusNote[this.index] ? false : true;
-    this.editOrAddNote = note;
-    //alert(note);
+  addedNewNote() {
+    this.storedNotes.put();
+    return (this.newNote = true);
+    //this.storedNotes.Notes.Notes.notes.unshift(this.eachNote);
   }
 }
