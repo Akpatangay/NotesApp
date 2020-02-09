@@ -6,11 +6,15 @@ import { Note } from "../interfaces/notes";
 })
 export class SearchPipe implements PipeTransform {
   transform(notes: any[], search: any): any[] {
+    debugger;
     if (!notes || !search) {
       return notes;
     }
     return notes.filter(
-      note => note.body.toLowerCase().indexOf(search.toLowerCase()) !== -1
+      note =>
+        note.body.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        note.title.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        note.timeStamp.toLowerCase().indexOf(search.toLowerCase()) !== -1
     );
   }
 }
