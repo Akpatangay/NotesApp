@@ -9,14 +9,16 @@ import * as lodash from "lodash";
   styleUrls: ["./notes.component.css"]
 })
 export class NotesComponent implements OnInit {
+  @Input() searchItem: string;
   notesArray: Note[] = [];
   editOrAddNote: string;
   index: number = 0;
   focusNote: boolean[] = [];
-  showCursor: boolean = true;
   titleSave: boolean = false;
 
-  @Input() search;
+  // @Input() set search(value) {
+  //   console.log(value);
+  // }
   @Output() deleteIndex: EventEmitter<number> = new EventEmitter();
 
   constructor(public storedNotes: StoreAllNotesService) {
@@ -33,7 +35,7 @@ export class NotesComponent implements OnInit {
   }
 
   selectedNote(note, i) {
-    this.showCursor = true;
+    this.titleSave = false;
     this.focusNote.fill(false);
     this.index = i;
     this.focusNote[this.index] = this.focusNote[this.index] ? false : true;
@@ -54,6 +56,7 @@ export class NotesComponent implements OnInit {
 
     localStorage.setItem("storedNotes", JSON.stringify(this.storedNotes.Notes));
     //this.storedNotes.Notes.notes[this.index].title = event;
+    this.titleSave = true;
   }
   debounceText = lodash.debounce(
     event => this.keyUpFunction(event),

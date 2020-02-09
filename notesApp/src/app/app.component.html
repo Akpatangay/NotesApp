@@ -3,15 +3,16 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" (click)="addedNewNote()"
-            ><i class="fas fa-plus"></i>
-          </a>
+          <button class="nav-link" (click)="addedNewNote()">
+            <i class="fas fa-plus"></i> Add Note
+          </button>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" (click)="deleteNote()"
-            ><i class="fas fa-trash"></i
-          ></a>
+          <button class="nav-link" (click)="deleteNote()">
+            <i class="fas fa-trash"></i>
+            Delete Note
+          </button>
         </li>
       </ul>
     </div>
@@ -20,7 +21,7 @@
       class="form-control mr-sm-2"
       type="text"
       ngDefaultControl
-      [(ngModel)]="search"
+      [(ngModel)]="searchItem"
       placeholder="Search"
     />
 
@@ -36,7 +37,7 @@
 </header>
 
 <app-notes
-  [search]="search"
   (addedNewNote)="addedNewNote()"
   (deleteIndex)="getIndex($event)"
+  [searchItem]="searchItem"
 ></app-notes>

@@ -8,6 +8,7 @@ import { Note } from "./interfaces/notes";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
+  searchItem: String = "";
   newNote: boolean = false;
   focusNote: any[] = [];
   notesArray: Note[] = [];
@@ -17,6 +18,7 @@ export class AppComponent {
 
   constructor(public storedNotes: StoreAllNotesService) {
     this.focusNote = this.focusNote.fill(false);
+
     //alert("from app" + this.storedNotes.dummyWord);
   }
   addedNewNote() {
@@ -29,6 +31,6 @@ export class AppComponent {
   }
   deleteNote() {
     this.storedNotes.Notes.notes.splice(this.index, 1);
-    localStorage.setItem("storedNotes", this.storedNotes.Notes.notes);
+    localStorage.setItem("storedNotes", JSON.stringify(this.storedNotes.Notes));
   }
 }

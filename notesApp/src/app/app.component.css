@@ -1,0 +1,19 @@
+.form-control {
+  width: calc(50%);
+}
+button {
+  background-color: rgb(52, 58, 64);
+  color: white;
+  border: none;
+}
+ul {
+  width: 80%;
+}
+li {
+  margin-right: 5%;
+}
+@media only screen and (max-width: 700px) {
+  .form-control {
+    width: calc(80%);
+  }
+}
