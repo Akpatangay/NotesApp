@@ -43,9 +43,9 @@
   </div>
   <div class="rightCol col-md-8 col-sm-6 col-xs-6 writingSpace">
     <ng-container *ngIf="storedNotes?.Notes?.notes?.length">
-      <!-- <h4 *ngIf="titleSave">
-          {{ (storedNotes?.Notes?.notes)[index]?.title }}
-        </h4> -->
+      <h5 *ngIf="(storedNotes?.Notes?.notes)[index]?.title">
+        {{ (storedNotes?.Notes?.notes)[index]?.title }}
+      </h5>
       <ng-container *ngIf="titleSave">
         <textarea
           placeholder="Start Typing here..."

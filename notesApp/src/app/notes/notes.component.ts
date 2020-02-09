@@ -25,17 +25,19 @@ export class NotesComponent implements OnInit {
     this.storedNotes.subject.subscribe(data => {
       this.focusNote = this.focusNote.fill(false);
       this.focusNote[0] = true;
+      this.titleSave = false;
     });
   }
 
   ngOnInit() {
     console.log(this.storedNotes.get());
     this.focusNote = this.focusNote.fill(false);
+    this.focusNote[0] = true;
     //alert("from notes" + this.storedNotes.dummyWord);
   }
 
   selectedNote(note, i) {
-    this.titleSave = false;
+    this.titleSave = true;
     this.focusNote.fill(false);
     this.index = i;
     this.focusNote[this.index] = this.focusNote[this.index] ? false : true;
@@ -44,14 +46,21 @@ export class NotesComponent implements OnInit {
   }
 
   keyUpFunction(event) {
-    //if (this.storedNotes.Notes.notes[this.index].title === "") {
-    if (event.indexOf("\n") != -1) {
-      this.storedNotes.Notes.notes[this.index].title =
-        event.split("\n")[0] + " ";
-      this.storedNotes.Notes.notes[this.index].body = event.split("\n")[1];
+    if (!this.storedNotes.Notes.notes[this.index].body) {
+      if (event.indexOf("\n") != -1) {
+        this.storedNotes.Notes.notes[this.index].title = event.slice(
+          0,
+          event.indexOf("\n")
+        );
+        this.storedNotes.Notes.notes[this.index].body = event.slice(
+          event.indexOf("\n")
+        );
+      } else {
+        this.storedNotes.Notes.notes[this.index].title = event;
+        // this.storedNotes.Notes.notes[this.index].body = event;
+      }
     } else {
-      this.storedNotes.Notes.notes[this.index].title = event;
-      // this.storedNotes.Notes.notes[this.index].body = event;
+      this.storedNotes.Notes.notes[this.index].body = event;
     }
 
     localStorage.setItem("storedNotes", JSON.stringify(this.storedNotes.Notes));

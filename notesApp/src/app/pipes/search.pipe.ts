@@ -6,7 +6,6 @@ import { Note } from "../interfaces/notes";
 })
 export class SearchPipe implements PipeTransform {
   transform(notes: any[], search: any): any[] {
-    debugger;
     if (!notes || !search) {
       return notes;
     }
