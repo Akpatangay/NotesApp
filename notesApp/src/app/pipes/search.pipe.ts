@@ -12,11 +12,7 @@ export class SearchPipe implements PipeTransform {
     return notes.filter(
       note =>
         note.body.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        note.title.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        note.timeStamp
-          .toString()
-          .toLowerCase()
-          .indexOf(search.toLowerCase()) !== -1
+        note.title.toLowerCase().indexOf(search.toLowerCase()) !== -1
     );
   }
 }
