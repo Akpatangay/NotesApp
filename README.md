@@ -7,3 +7,7 @@ Functionality includes
 1)passing data from parent to child and raising and handling events from child to parent component
 2)use of rxjs subject
 3)Use of lodash library for debouncing, etc.
+
+Project link- 
+
+https://notes-project-app.herokuapp.com/
