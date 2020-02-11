@@ -10,4 +10,4 @@ Functionality includes
 
 Project link- 
 
-https://notes-project-app.herokuapp.com/
+https://notes-application-project.herokuapp.com/
